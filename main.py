@@ -50,5 +50,3 @@ while True:
     choice=input("\nDo you want to enter another record (y/n): ").strip().lower()
     if choice !="y":
         break
-          
-input("Press enter to exit...")
