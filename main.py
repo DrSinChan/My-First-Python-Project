@@ -1,51 +1,81 @@
 print("Hello World, Python is working.")
 while True:
-    name= input("Enter your name: ")
-    while True:
+    name= input("Enter name: ").strip().upper()
+
+    while True:        
+        age_input = input(f"Enter age of {name} (in whole years): ").strip()
+        if "/" in age_input:
+            print(f"{age_input} is a fraction. Please enter valid age of {name} only as number in whole years (no fractions).")
+            continue
         try:
-            age = int(input("Enter your age (in years): "))
-            if age <= 0:
-                print("Invalid age entered. Enter valid age in years.")
+            age_float=float(age_input)
+
+            if not age_float.is_integer():
+                print(f"{age_input} is a decimal number. Please enter valid age of {name} only as number in whole years (no decimals).")
                 continue
-            break
+
+            else:
+                age = int(age_float)
+                if age == 0:
+                    print(f"Age cannot be {age_input}. Please enter valid age of {name} only as positive number in whole years .")
+                    continue
+                if age < 0:
+                    print(f"{age} is a negative number. Please enter valid age of {name} only as positive number in whole years.")
+                    continue                
+                else:
+                    break
+        
         except ValueError:
-            print("Invalid age entered. Enter valid age in years.")
+            print(f"{age_input} is an invalid text. Please enter valid age of {name} only as number in whole years.")
+            continue
+
+    gender_map={
+        "m":"his",
+        "male":"his",
+        
+        "f": "her",
+        "female":"her",
+
+        "o":"his/her",
+        "other":"his/her",
+        "others":"his/her"
+    }
 
     while True:
-        gender = input("Enter your gender (m/f/o) : ").strip().lower()
-        if gender=="m":
-            pronoun="his"
-            break
-        elif gender=="f":
-            pronoun="her"
-            break
-        elif gender=="o":
-            pronoun="his/her"
+        gender = input(f"Enter gender of {name} : ").strip().lower()    
+        if gender in gender_map:
+            pronoun=gender_map[gender]
             break
         else:
-            print("Invalid gender entered. Please enter m, f or o.")
+            print("Invalid gender entered. Please enter 'male / female / other' or related shortforms")
 
     if  age==1:
         stage= "Infant"
-    elif 2 <= age <= 3:
+    elif age <= 3:
         stage = "Toddler"
-    elif 4<= age <= 12:
+    elif age <= 12:
         stage = "Child"
-    elif 13<= age <= 19:
+    elif age <= 19:
         stage= "Teenager"
-    elif 20<= age <= 60:
+    elif age <= 60:
         stage="Adult"
     elif age >= 60:
         stage= "Senior Citizen"
     else:
         print("An error occured. Could be an invalid age.")
+        continue
 
     if stage[0].lower() in "aeiou":
         article = "an"
     else:
         article="a"
 
-    print(name, "is", article, stage, "and", pronoun, "age is", age, "years.")
+    if age==1:
+        year="year."
+    else:
+        year="years."
+
+    print(f"{name} is {article} {stage} and {pronoun} age is {age} {year}")
 
     choice=input("\nDo you want to enter another record (y/n): ").strip().lower()
     if choice !="y":
