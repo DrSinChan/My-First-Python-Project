@@ -1,6 +1,6 @@
 print("Hello World, Python is working.")
 while True:
-    name= input("Enter name: ").strip().upper()
+    name= input("Enter name: ").strip().title()
 
     while True:        
         age_input = input(f"Enter age of {name} (in whole years): ").strip()
@@ -22,23 +22,16 @@ while True:
                 if age < 0:
                     print(f"{age} is a negative number. Please enter valid age of {name} only as positive number in whole years.")
                     continue                
-                else:
-                    break
+                break
         
         except ValueError:
             print(f"{age_input} is an invalid text. Please enter valid age of {name} only as number in whole years.")
             continue
 
     gender_map={
-        "m":"his",
-        "male":"his",
-        
-        "f": "her",
-        "female":"her",
-
-        "o":"his/her",
-        "other":"his/her",
-        "others":"his/her"
+        "m":"his", "male":"his",        
+        "f": "her", "female":"her",
+        "o":"his/her", "other":"his/her", "others":"his/her"
     }
 
     while True:
@@ -57,7 +50,7 @@ while True:
         stage = "Child"
     elif age <= 19:
         stage= "Teenager"
-    elif age <= 60:
+    elif age < 60:
         stage="Adult"
     elif age >= 60:
         stage= "Senior Citizen"
